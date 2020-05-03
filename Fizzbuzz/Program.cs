@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Fizzbuzz
 {
@@ -6,53 +8,41 @@ namespace Fizzbuzz
     {
         static void Main(string[] args)
         {
-            for (int i = 0; i < 100; i++)
-            {                
-                if(i % 5 == 0 && i % 3 == 0)
-                {
-                    Console.WriteLine("Fizzbuzz");
-                    continue;
-                }
+            
+            float preco = 42.00f;
 
-                if(i % 5 == 0)
-                {
-                    Console.WriteLine("Buzz");
-                    continue;
-                }
-                
-                if(i % 3 == 0)
-                {
-                    Console.WriteLine("Fizz");
-                    continue;
-                }  
+            List<Ordem> ordens = new List<Ordem>();
+            
+            ordens.Add(new Ordem{Item = "livro1", Quantidade = 2}); 
+            ordens.Add(new Ordem{Item = "livro2", Quantidade = 2}); 
+            ordens.Add(new Ordem{Item = "livro3", Quantidade = 2}); 
+            ordens.Add(new Ordem{Item = "livro4", Quantidade = 1}); 
+            ordens.Add(new Ordem{Item = "livro5", Quantidade = 1}); 
+            
+            float valorTotal = ordens.Sum(o => o.Quantidade) * preco;
 
-                Console.WriteLine(i);
+            float desconto = ((((float)ordens.Count * 5F) - 5F) / 100F) * valorTotal;
 
-            }
+            Console.WriteLine(valorTotal);
+            Console.WriteLine(desconto);
+            
 
-            for (int i = 0; i < 100; i++)
-            {                
-                if(i % 5 == 0 && i % 3 == 0)
-                {
-                    Console.WriteLine("Fizzbuzz");
-                }
+            float valorFinal = valorTotal - desconto;
 
-                else if(i % 5 == 0)
-                {
-                    Console.WriteLine("Buzz");
-                }
-                
-                else if(i % 3 == 0)
-                {
-                    Console.WriteLine("Fizz");
-                }  
-                else
-                {
-                    Console.WriteLine(i);
-                }
+            Console.WriteLine(valorFinal); 
 
-            }          
+            
 
         }
+
+       
+    }
+
+    public class Ordem 
+    {
+        public string Item {get; set;}
+        public int Quantidade {get; set;}
+
     }
 }
+
